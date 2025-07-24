@@ -20,7 +20,6 @@ html {
 }
 body {
   font-family: "Rubik", sans-serif;
-  background-color: var(--Grey-100);
 }
 body.no-scroll {
   overflow: hidden;
@@ -73,7 +72,7 @@ p {
 }
 @media (max-width: 767px) {
   .page-container .bg-image {
-    background-color: url(/images/pattern-bg-mobile.png);
+    background-image: url(/images/pattern-bg-mobile.png);
   }
 }
 .page-container #map {

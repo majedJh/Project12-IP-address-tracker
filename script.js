@@ -15,7 +15,9 @@ const ipData = {
     isp: undefined
 }
 let map, marker;
+
 //main
+
 window.addEventListener("DOMContentLoaded", async () => {
     //load the map on load with the user's current IP adress
     const userIp = await getCurrentIpAdress();
@@ -46,7 +48,7 @@ async function fetchData(link) {
     const timeout = setTimeout(() => { controller.abort() }, 30000);
     try {
         const response = await fetch(link, { signal: controller.signal })
-        if (!response.ok) throw new Error("not found, code: " + response.status);
+        if (!response.ok) throw new Error("code: " + response.status);
         return await response.json();
     }
     catch (err) {
@@ -63,9 +65,11 @@ async function fetchData(link) {
 }
 
 async function createMap(data) {
+    if (!data) return;
     updateIpData(data);
     updatePageData();
     const [lat, long] = [data.location.lat, data.location.lng];
+    if (typeof lat != "number" || typeof long != "number") return;
     if (map) {
         map.setView([lat, long], 13);
         marker.setLatLng([lat, long]);
@@ -91,17 +95,17 @@ async function updatePageData() {
     elements.isp.innerText = ipData.isp || "Unknown";
 }
 async function updateMap() {
-
     const inputValue = elements.ipInput.value;
+    let type = validateInputValue(inputValue)
+    if (!type) return;
+    const data = await fetchData(`https://geo.ipify.org/api/v2/country,city?apiKey=at_SKlt6CzcbmcPtJA7EYqcijWa4ADPh&${type}=${inputValue}`);
+    createMap(data);
+}
+function validateInputValue(inputValue) {
     const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
     const ipv4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     const domainRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9-_]+\.[a-zA-Z]{2,6}$/;
-    let type;
-    if (ipv6Regex.test(inputValue) || ipv4Regex.test(inputValue) ) {
-        type = "ipAddress"
-    } else if (domainRegex.test(inputValue)) {
-        type = "domain"
-    } else return;
-    const data = await fetchData(`https://geo.ipify.org/api/v2/country,city?apiKey=at_SKlt6CzcbmcPtJA7EYqcijWa4ADPh&${type}=${inputValue}`);
-    createMap(data);
+    if (ipv6Regex.test(inputValue) || ipv4Regex.test(inputValue)) return "ipAddress"
+    else if (domainRegex.test(inputValue)) return "domain";
+    return;
 }

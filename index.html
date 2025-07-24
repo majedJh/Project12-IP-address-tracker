@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <!-- styling  -->
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/framework.css">
+  <link rel="stylesheet" href="/css/master.css">
+  <!-- font style  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+  rel="stylesheet">
+  <!-- leafletJs -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- main script file  -->
+  <script defer src="script.js"></script>
+  <title>Frontend Mentor | IP Address Tracker</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+
+</head>
+
+<body>
+
+  <div class="page-container">
+    <div class="bg-image">
+    </div>
+    <div class="map" id="map"></div>
+    <div class="data p-absolute d-flex">
+      <h2>IP Adress Tracker</h3>
+      <div class="ip-input d-flex">
+        <input type="text" placeholder="Search for any IP adress or domain" tabindex="1">
+        <button class="submit-button"><img src="/images/icon-arrow.svg" alt="" tabindex="1"></button>
+      </div>
+      <div class="data-box d-flex">
+        <div class="ip-adress">
+          <h3>IP Adress</h3>
+          <div class="value"></div>
+        </div>
+        <div class="location">
+          <h3>Location</h3>
+          <div class="value"></div>
+        </div>
+        <div class="time-zone">
+          <h3>Timezone</h3>
+          <div class="value"></div>
+        </div>
+        <div class="isp">
+          <h3>ISP</h3>
+          <div class="value"></div>
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="https://github.com/majedJh/">MHD Majed Aljajeh</a>.
+    </div>
+  </div>
+
+
+</body>
+
+</html>
